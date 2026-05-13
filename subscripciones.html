@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flujo de Suscripciones · MaximizeMagic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d1a;
+      color: #e8e0cc;
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Stars background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(70, 50, 140, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(40, 80, 160, 0.18) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 40px 24px 28px;
+      text-align: center;
+      border-bottom: 1px solid rgba(200, 170, 80, 0.2);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .logo-m {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #2a2a6e, #0d0d1a);
+      border: 2px solid rgba(200,170,80,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      color: #c8aa50;
+      text-shadow: 0 0 12px rgba(200,170,80,0.6);
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 4vw, 30px);
+      font-weight: 600;
+      color: #c8aa50;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: rgba(232, 224, 204, 0.5);
+      margin-top: 6px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 820px;
+      padding: 36px 20px 60px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: rgba(200,170,80,0.7);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .diagram-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(200,170,80,0.15);
+      border-radius: 16px;
+      padding: 28px 16px;
+      margin-bottom: 40px;
+    }
+
+    .diagram-card svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* SVG node colors */
+    .c-purple rect { fill: #1e1a3e; stroke: #7f77dd; }
+    .c-purple text { fill: #afa9ec; }
+    .c-blue rect   { fill: #0f2038; stroke: #378add; }
+    .c-blue text   { fill: #85b7eb; }
+    .c-amber rect  { fill: #2a1e08; stroke: #ba7517; }
+    .c-amber text  { fill: #fac775; }
+    .c-teal rect   { fill: #051f17; stroke: #1d9e75; }
+    .c-teal text   { fill: #5dcaa5; }
+    .c-gray rect   { fill: #1a1a18; stroke: #888780; }
+    .c-gray text   { fill: #b4b2a9; }
+    .c-red rect    { fill: #200d0d; stroke: #e24b4a; }
+    .c-red text    { fill: #f09595; }
+    .c-pink rect   { fill: #220d14; stroke: #d4537e; }
+    .c-pink text   { fill: #ed93b1; }
+
+    text.label-sm { fill: rgba(232,224,204,0.45); font-size: 11px; }
+    text.th { font-size: 13px; font-weight: 700; font-family: 'Lato', sans-serif; }
+    text.ts { font-size: 11px; font-weight: 400; font-family: 'Lato', sans-serif; }
+    .arr { stroke: rgba(200,170,80,0.35); stroke-width: 1.5; fill: none; }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(232,224,204,0.6);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Plans grid */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .plan-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 3px solid;
+    }
+
+    .plan-card.free   { border-color: #888780; }
+    .plan-card.basic  { border-color: #1d9e75; }
+    .plan-card.premium{ border-color: #ba7517; }
+
+    .plan-id {
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(200,170,80,0.6);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .plan-name {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      color: #e8e0cc;
+      margin-bottom: 4px;
+    }
+
+    .plan-desc {
+      font-size: 12px;
+      color: rgba(232,224,204,0.45);
+      line-height: 1.5;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: rgba(232,224,204,0.25);
+      border-top: 1px solid rgba(200,170,80,0.08);
+      width: 100%;
+    }
+
+    footer a { color: rgba(200,170,80,0.4); text-decoration: none; }
+    footer a:hover { color: rgba(200,170,80,0.7); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-row">
+    <div class="logo-m">M</div>
+    <h1>Maximize the Magic</h1>
+  </div>
+  <p class="subtitle">Sistema de suscripciones · Flujo de pagos</p>
+</header>
+
+<main>
+
+  <p class="section-title">Diagrama de flujo · Decisión de acceso</p>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 680 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flujo de suscripciones MaximizeMagic">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(200,170,80,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <text class="label-sm" x="340" y="14" text-anchor="middle">Plan it or wing it · never stop dreaming</text>
+
+      <!-- B1: Login -->
+      <g class="c-purple">
+        <rect x="260" y="22" width="160" height="44" rx="8" stroke-width="0.8"/>
+        <text class="th" x="340" y="44" text-anchor="middle" dominant-baseline="central">Inicio de sesión</text>
+      </g>
+
+      <line x1="340" y1="66" x2="340" y2="94" class="arr" marker-end="url(#arr)"/>
+
+      <!-- B2: Verificar suscripción -->
+      <g class="c-blue">
+        <rect x="200" y="94" width="280" height="56" rx="8" stroke-width="0.8"/>
+        <text class="th" x="340" y="112" text-anchor="middle" dominant-baseline="central">Verificar suscripción</text>
+        <text class="ts" x="340" y="132" text-anchor="middle" dominant-baseline="central">Revisamos el plan activo del usuario</text>
+      </g>
+
+      <!-- Ramas -->
+      <path d="M280,150 L280,180 L110,180 L110,208" class="arr" marker-end="url(#arr)"/>
+      <line x1="340" y1="150" x2="340" y2="208" class="arr" marker-end="url(#arr)"/>
+      <path d="M400,150 L400,180 L550,180 L550,208" class="arr" marker-end="url(#arr)"/>
+
+      <text class="label-sm" x="192" y="175" text-anchor="middle">Premium</text>
+      <text class="label-sm" x="350" y="170" text-anchor="start">Básico</text>
+      <text class="label-sm" x="475" y="175" text-anchor="middle">Sin plan</text>
+
+      <!-- B3a: Premium -->
+      <g class="c-amber">
+        <rect x="20" y="208" width="180" height="56" rx="8" stroke-width="0.8"/>
+        <text class="th" x="110" y="226" text-anchor="middle" dominant-baseline="central">Premium $2.99/mes</text>
+        <text class="ts" x="110" y="246" text-anchor="middle" dominant-baseline="central">Sin anuncios</text>
+      </g>
+
+      <!-- B3b: Básico -->
+      <g class="c-teal">
+        <rect x="250" y="208" width="180" height="56" rx="8" stroke-width="0.8"/>
+        <text class="th" x="340" y="226" text-anchor="middle" dominant-baseline="central">Básico $0.99/mes</text>
+        <text class="ts" x="340" y="246" text-anchor="middle" dominant-baseline="central">Con anuncios · AdMob</text>
+      </g>
+
+      <!-- B3c: Sin suscripción -->
+      <g class="c-gray">
+        <rect x="460" y="208" width="180" height="56" rx="8" stroke-width="0.8"/>
+        <text class="th" x="550" y="226" text-anchor="middle" dominant-baseline="central">Sin suscripción</text>
+        <text class="ts" x="550" y="246" text-anchor="middle" dominant-baseline="central">Verificamos el trial</text>
+      </g>
+
+      <!-- Sin suscripción → Trial check -->
+      <path d="M550,264 L550,298 L500,298 L500,328" class="arr" marker-end="url(#arr)"/>
+
+      <!-- B4: Trial check -->
+      <g class="c-blue">
+        <rect x="380" y="328" width="240" height="56" rx="8" stroke-width="0.8"/>
+        <text class="th" x="500" y="346" text-anchor="middle" dominant-baseline="central">¿Trial activo?</text>
+        <text class="ts" x="500" y="366" text-anchor="middle" dominant-baseline="central">Verificamos los 3 días de gracia</text>
+      </g>
+
+      <line x1="440" y1="384" x2="440" y2="446" class="arr" marker-end="url(#arr)"/>
+      <line x1="568" y1="384" x2="568" y2="446" class="arr" marker-end="url(#arr)"/>
+      <text class="label-sm" x="426" y="418" text-anchor="end">Sí</text>
+      <text class="label-sm" x="580" y="418" text-anchor="start">No</text>
+
+      <!-- B5a: Trial activo -->
+      <g class="c-gray">
+        <rect x="380" y="446" width="120" height="44" rx="8" stroke-width="0.8"/>
+        <text class="th" x="440" y="468" text-anchor="middle" dominant-baseline="central">Trial activo</text>
+      </g>
+
+      <!-- B5b: Paywall -->
+      <g class="c-red">
+        <rect x="518" y="446" width="100" height="44" rx="8" stroke-width="0.8"/>
+        <text class="th" x="568" y="468" text-anchor="middle" dominant-baseline="central">Paywall</text>
+      </g>
+
+      <!-- Básico → AdProc -->
+      <line x1="340" y1="264" x2="340" y2="546" class="arr" marker-end="url(#arr)"/>
+      <!-- Trial activo → AdProc -->
+      <line x1="440" y1="490" x2="440" y2="546" class="arr" marker-end="url(#arr)"/>
+
+      <!-- B6: Procesar anuncio AdMob -->
+      <g class="c-pink">
+        <rect x="200" y="546" width="280" height="56" rx="8" stroke-width="0.8"/>
+        <text class="th" x="340" y="564" text-anchor="middle" dominant-baseline="central">Procesar anuncio AdMob</text>
+        <text class="ts" x="340" y="584" text-anchor="middle" dominant-baseline="central">App Open / Interstitial / Rewarded</text>
+      </g>
+
+      <!-- Premium → App -->
+      <path d="M110,264 L110,618 L222,618 L222,646" class="arr" marker-end="url(#arr)"/>
+      <!-- AdProc → App -->
+      <line x1="340" y1="602" x2="340" y2="646" class="arr" marker-end="url(#arr)"/>
+
+      <!-- B7: App MaximizeMagic -->
+      <g class="c-purple">
+        <rect x="210" y="646" width="220" height="44" rx="8" stroke-width="0.8"/>
+        <text class="th" x="320" y="668" text-anchor="middle" dominant-baseline="central">App MaximizeMagic</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="section-title">Planes disponibles</p>
+
+  <div class="plans-grid">
+    <div class="plan-card free">
+      <div class="plan-id">mm_trial_free</div>
+      <div class="plan-name">Prueba gratis</div>
+      <div class="plan-desc">3 días de acceso completo con anuncios AdMob. Sin necesidad de tarjeta de crédito.</div>
+    </div>
+    <div class="plan-card basic">
+      <div class="plan-id">mm_basic_099</div>
+      <div class="plan-name">Básico · $0.99/mes</div>
+      <div class="plan-desc">Acceso completo a todos los parques con anuncios. La opción más económica.</div>
+    </div>
+    <div class="plan-card premium">
+      <div class="plan-id">mm_premium_299</div>
+      <div class="plan-name">Premium · $2.99/mes</div>
+      <div class="plan-desc">Acceso completo sin anuncios. Experiencia limpia para los más exigentes.</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#7f77dd"></div>Inicio / App</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#378add"></div>Decisión</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ba7517"></div>Premium</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1d9e75"></div>Básico</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#888780"></div>Sin suscripción / Trial</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e24b4a"></div>Paywall</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#d4537e"></div>Procesamiento AdMob</div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="privacy_policy.html">Política de privacidad</a> &nbsp;·&nbsp;
+  MaximizeMagic &copy; 2025 · Plan it or wing it, never stop dreaming.
+</footer>
+
+</body>
+</html>
