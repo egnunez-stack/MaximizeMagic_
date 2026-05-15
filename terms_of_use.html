@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use – Maximize Magic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --surface: #12122a;
+      --surface2: #1a1a38;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --text: #e8e6f0;
+      --text-muted: #9b99b0;
+      --accent: #7c6fcf;
+      --border: rgba(201,168,76,0.18);
+      --radius: 14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* Starfield background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 75%, rgba(255,255,255,0.35) 0%, transparent 100%),
+        radial-gradient(600px 400px at 50% 0%, rgba(124,111,207,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .logo-icon {
+      font-size: 2.8rem;
+      display: block;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 18px rgba(201,168,76,0.4));
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .last-updated {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 16px;
+    }
+
+    .intro-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .intro-card strong { color: var(--text); }
+
+    /* Sections */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      transition: border-color 0.25s;
+    }
+
+    .section:hover {
+      border-color: rgba(201,168,76,0.35);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .section-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(201,168,76,0.3));
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      margin-bottom: 12px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+
+    ul li {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      padding: 6px 0 6px 22px;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.6rem;
+      top: 10px;
+    }
+
+    strong { color: var(--text); font-weight: 700; }
+
+    a {
+      color: var(--gold-light);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: #fff;
+      border-color: var(--gold-light);
+    }
+
+    /* EULA highlight box */
+    .eula-box {
+      background: linear-gradient(135deg, rgba(124,111,207,0.12), rgba(201,168,76,0.08));
+      border: 1px solid rgba(124,111,207,0.35);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .eula-box a {
+      color: #a99fe8;
+      border-bottom-color: rgba(169,159,232,0.35);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-bottom: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover { opacity: 1; color: var(--gold-light); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 8px 0 20px;
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 22px 18px; }
+      .container { padding: 40px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <span class="logo-icon">✨</span>
+      <h1>Terms of Use</h1>
+      <p class="subtitle">Maximize Magic · Orlando Parks</p>
+      <span class="last-updated">Last updated: May 15, 2026</span>
+    </header>
+
+    <div class="intro-card">
+      Please read these Terms of Use carefully before using <strong>Maximize Magic</strong>. By downloading, installing, or using the app, you agree to be bound by these terms. If you do not agree, please do not use the app.
+    </div>
+
+    <!-- 1. Acceptance -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📜</span>
+        <h2>1. Acceptance of Terms</h2>
+      </div>
+      <p>By accessing or using Maximize Magic ("the App"), you confirm that you are at least 13 years of age, have read and understood these Terms, and agree to be legally bound by them.</p>
+      <p>If you are using the App on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+    </div>
+
+    <!-- 2. License -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📱</span>
+        <h2>2. License to Use</h2>
+      </div>
+      <p>Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to download and use the App for your personal, non-commercial purposes.</p>
+      <p>You may <strong>not</strong>:</p>
+      <ul>
+        <li>Copy, modify, or distribute any part of the App</li>
+        <li>Reverse engineer, decompile, or disassemble the App</li>
+        <li>Use the App for any unlawful or unauthorized purpose</li>
+        <li>Attempt to gain unauthorized access to any servers or networks connected to the App</li>
+        <li>Scrape, harvest, or systematically extract data from the App</li>
+      </ul>
+    </div>
+
+    <!-- 3. Subscriptions -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">👑</span>
+        <h2>3. Premium Subscriptions</h2>
+      </div>
+      <p>Maximize Magic offers the following auto-renewable subscription plans:</p>
+      <ul>
+        <li><strong>Monthly Premium:</strong> $2.99 USD / month — ad-free experience</li>
+        <li><strong>Annual Premium:</strong> $29.99 USD / year — ad-free experience (best value)</li>
+      </ul>
+      <div class="divider"></div>
+      <p>Subscriptions are billed through your Apple ID account. Payment is charged to your Apple ID at confirmation of purchase. Subscriptions automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current period. You may manage or cancel your subscription at any time in your device's Account Settings.</p>
+      <p>No cancellation of the current subscription is allowed during the active subscription period. Any unused portion of a free trial period will be forfeited when you purchase a subscription.</p>
+      <div class="eula-box">
+        🔗 By subscribing, you also agree to Apple's <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Standard End User License Agreement (EULA)</a>.
+      </div>
+    </div>
+
+    <!-- 4. Wait Time Data -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⏱️</span>
+        <h2>4. Wait Time Data &amp; Accuracy</h2>
+      </div>
+      <p>Wait time data displayed in the App is sourced from publicly available third-party APIs (including the themeparks open-source API) and is provided for informational purposes only.</p>
+      <p>We do not guarantee the accuracy, completeness, or timeliness of wait time information. Actual wait times at theme parks may differ. Maximize Magic is not affiliated with, endorsed by, or officially connected to Walt Disney World, Universal Orlando Resort, SeaWorld Orlando, or any other theme park operator.</p>
+    </div>
+
+    <!-- 5. User Accounts -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">👤</span>
+        <h2>5. User Accounts</h2>
+      </div>
+      <p>Sign-in is optional. If you choose to sign in with Facebook or Google, you are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.</p>
+      <p>You may delete your account at any time from <strong>Settings → Delete Account</strong> within the App. See our <a href="privacy_policy.html">Privacy Policy</a> for details on data deletion.</p>
+    </div>
+
+    <!-- 6. Intellectual Property -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚖️</span>
+        <h2>6. Intellectual Property</h2>
+      </div>
+      <p>All content, design, graphics, and code within Maximize Magic are the exclusive property of Eduardo Nuñez and are protected by applicable intellectual property laws.</p>
+      <p>Theme park names, logos, and trademarks referenced within the App are the property of their respective owners. Their use is solely for informational and descriptive purposes.</p>
+    </div>
+
+    <!-- 7. Disclaimers -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🛡️</span>
+        <h2>7. Disclaimers &amp; Limitation of Liability</h2>
+      </div>
+      <p>The App is provided <strong>"as is"</strong> and <strong>"as available"</strong> without warranties of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+      <p>To the fullest extent permitted by law, Maximize Magic and its developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use the App.</p>
+    </div>
+
+    <!-- 8. Third-Party Services -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🌐</span>
+        <h2>8. Third-Party Services</h2>
+      </div>
+      <p>The App integrates third-party services (Google AdMob, RevenueCat, Firebase, Facebook Login, Google Sign-In, and themeparks API). Your use of those services is subject to their respective terms and policies. We are not responsible for the practices of any third-party services.</p>
+    </div>
+
+    <!-- 9. Changes -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🔄</span>
+        <h2>9. Changes to These Terms</h2>
+      </div>
+      <p>We reserve the right to modify these Terms at any time. Updated terms will be posted on this page with a revised date. Continued use of the App after changes constitutes your acceptance of the new Terms.</p>
+    </div>
+
+    <!-- 10. Governing Law -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🏛️</span>
+        <h2>10. Governing Law</h2>
+      </div>
+      <p>These Terms shall be governed by and construed in accordance with applicable law. Any disputes arising from the use of the App will be resolved through good-faith negotiation or, if necessary, binding arbitration.</p>
+    </div>
+
+    <!-- 11. Contact -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">✉️</span>
+        <h2>11. Contact</h2>
+      </div>
+      <p>If you have any questions about these Terms of Use, please contact us:</p>
+      <p><a href="https://github.com/egnunez-stack/MaximizeMagic/issues" target="_blank" rel="noopener">Open an issue on GitHub →</a></p>
+    </div>
+
+    <footer>
+      <p>© 2026 Maximize Magic. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="privacy_policy.html">Privacy Policy</a>
+        <a href="terms_of_use.html">Terms of Use</a>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Apple EULA</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
