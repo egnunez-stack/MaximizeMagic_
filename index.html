@@ -350,10 +350,7 @@
       margin-top: 4px;
     }
 
-    .legal-card-link .arrow {
-      transition: transform 0.2s;
-    }
-
+    .legal-card-link .arrow { transition: transform 0.2s; }
     .legal-card:hover .arrow { transform: translateX(4px); }
 
     /* ── Footer ── */
@@ -376,11 +373,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -391,6 +383,9 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Hidden by platform JS */
+    .platform-hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -407,14 +402,18 @@
     <p class="hero-desc">
       Skip the guesswork. Get <strong>live wait times</strong> for every ride across Orlando's theme parks — all in one place, so you spend less time in line and more time making memories.
     </p>
+
     <div class="cta-group">
-      <a href="https://play.google.com/store" class="btn-primary">
+      <!-- Shown only on Android + Desktop -->
+      <a id="btn-android" href="https://play.google.com/store" class="btn-primary">
         ▶ Get it on Google Play
       </a>
-      <a href="https://apps.apple.com" class="btn-secondary">
-         Download on App Store
+      <!-- Shown only on iOS + Desktop -->
+      <a id="btn-ios" href="https://apps.apple.com" class="btn-secondary">
+        &#xf8ff; Download on App Store
       </a>
     </div>
+
     <div class="scroll-hint">
       <span>Scroll</span>
       <div class="scroll-arrow"></div>
@@ -438,10 +437,11 @@
         <p class="feature-title">All Parks in One Place</p>
         <p class="feature-desc">Walt Disney World, Universal, SeaWorld and more — browse every park and attraction from a single app.</p>
       </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">📱</span>
-        <p class="feature-title">Android & iOS</p>
-        <p class="feature-desc">Built with Kotlin Multiplatform for a native experience on both Android and iPhone.</p>
+      <!-- Mobile platform card: text adapts per platform -->
+      <div class="feature-card reveal" id="feature-platform">
+        <span class="feature-icon" id="feature-platform-icon">📱</span>
+        <p class="feature-title" id="feature-platform-title">Android &amp; iOS</p>
+        <p class="feature-desc" id="feature-platform-desc">Built with Kotlin Multiplatform for a native experience on both Android and iPhone.</p>
       </div>
       <div class="feature-card reveal">
         <span class="feature-icon">🔒</span>
@@ -458,34 +458,63 @@
     <p class="section-eyebrow reveal">Transparency</p>
     <h2 class="section-title reveal">Your privacy matters to us</h2>
     <p class="reveal" style="text-align:center; color: var(--text-dim); font-size: 0.97rem; max-width: 560px; margin: -30px auto 0;">
-      Maximize Magic is built with a privacy-first philosophy. We do not collect personal data, require registration, or sell information to third parties. Below you'll find our full policies.
+      Maximize Magic is built with a privacy-first philosophy. We do not collect personal data, require registration, or sell information to third parties.
     </p>
 
     <div class="legal-cards">
-
-      <a href="https://maximizemagic.netlify.app/privacy_policy.html" class="legal-card reveal">
+      <a href="https://egnunez-stack.github.io/MaximizeMagic_/privacy_policy.html" class="legal-card reveal">
         <div class="legal-card-icon">🛡️</div>
         <p class="legal-card-title">Privacy Policy</p>
-        <p class="legal-card-desc">Learn exactly what data we collect (very little), how we use it, and your rights as a user of Maximize Magic.</p>
+        <p class="legal-card-desc">Learn exactly what data we collect, how we use it, and your rights as a user of Maximize Magic.</p>
         <span class="legal-card-link">Read Privacy Policy <span class="arrow">→</span></span>
       </a>
-
-      <a href="https://maximizemagic.netlify.app/delete-my-data.html" class="legal-card reveal">
+      <a href="https://egnunez-stack.github.io/MaximizeMagic_/delete-my-data.html" class="legal-card reveal">
         <div class="legal-card-icon">🗑️</div>
         <p class="legal-card-title">Delete My Data</p>
         <p class="legal-card-desc">Want us to remove any data associated with you? Submit a deletion request and we'll process it within 30 days.</p>
         <span class="legal-card-link">Submit a Request <span class="arrow">→</span></span>
       </a>
-
     </div>
   </section>
 
   <footer>
-    © 2025 <span>Maximize Magic</span>. All rights reserved. · Built with ✨ for Orlando park lovers.
+    © 2026 <span>Maximize Magic</span>. All rights reserved. · Built with ✨ for Orlando park lovers.
   </footer>
 
   <script>
-    // Generate stars
+    // ── Platform detection ──────────────────────────────────────────────────
+    const ua = navigator.userAgent || '';
+    const isIOS     = /iPhone|iPad|iPod/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+
+    const btnAndroid = document.getElementById('btn-android');
+    const btnIOS     = document.getElementById('btn-ios');
+
+    if (isAndroid) {
+      // Android: show only Google Play
+      btnIOS.classList.add('platform-hidden');
+    } else {
+      // iOS, macOS, Windows, Linux — show only App Store
+      btnAndroid.classList.add('platform-hidden');
+    }
+
+    // ── Feature card: adapt text per platform ──────────────────────────────
+    const platformIcon  = document.getElementById('feature-platform-icon');
+    const platformTitle = document.getElementById('feature-platform-title');
+    const platformDesc  = document.getElementById('feature-platform-desc');
+
+    if (isAndroid) {
+      platformIcon.textContent  = '🤖';
+      platformTitle.textContent = 'Native Android Experience';
+      platformDesc.textContent  = 'Built with Kotlin Multiplatform for a truly native experience on your Android device.';
+    } else {
+      // iOS, macOS, Windows — show Apple-focused copy
+      platformIcon.textContent  = '';
+      platformTitle.textContent = 'Native iPhone Experience';
+      platformDesc.textContent  = 'Built with Kotlin Multiplatform for a truly native experience on your iPhone and iPad.';
+    }
+
+    // ── Generate stars ─────────────────────────────────────────────────────
     const container = document.getElementById('stars');
     for (let i = 0; i < 80; i++) {
       const s = document.createElement('span');
@@ -500,7 +529,7 @@
       container.appendChild(s);
     }
 
-    // Reveal on scroll
+    // ── Reveal on scroll ───────────────────────────────────────────────────
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
