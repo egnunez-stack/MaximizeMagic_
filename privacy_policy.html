@@ -1,6 +1,3 @@
-Aquí está el HTML completo:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +55,7 @@ Aquí está el HTML completo:
         <span class="star-icon">✨</span>
         <h1>Privacy Policy</h1>
         <p class="subtitle">Maximize Magic · Orlando Parks</p>
-        <div class="last-updated">Last updated: May 12, 2026</div>
+        <div class="last-updated">Last updated: July 31, 2026</div>
     </header>
 
     <main>
@@ -71,13 +68,16 @@ Aquí está el HTML completo:
                 <div class="section-icon">📋</div>
                 <h2>1. Information We Collect</h2>
             </div>
-            <p>Maximize Magic is designed to work with minimal data. Sign-in is optional — you may use the app as a guest without providing any personal information.</p>
+            <p>Maximize Magic is designed to work with minimal data. Sign-in is optional — you may use the app as a guest without providing personal information.</p>
             <ul>
-                <li><strong>Account information (optional):</strong> if you choose to sign in with Facebook or Google, we receive your name and email address from those services solely to identify your session within the app. We do not store this information on our own servers.</li>
-                <li><strong>Usage data:</strong> anonymous, aggregated information about app interactions (screens viewed, features used) to improve the experience.</li>
-                <li><strong>Device information:</strong> device model, operating system version, and app version — used solely for crash diagnostics.</li>
-                <li><strong>Location (optional):</strong> only if you explicitly grant permission, to show your nearest park. We never store or transmit your location.</li>
-                <li><strong>Purchase information:</strong> if you subscribe to a Premium plan, your purchase is processed by Apple and managed by RevenueCat. We receive only the subscription status (active or inactive) — we never access your payment card details.</li>
+                <li><strong>Account information (optional):</strong> if you sign in with Google, Facebook or Apple ("Sign in with Apple", including Apple's private email relay if you choose to hide your email), we receive your name and email address to identify your account. When you sign in, we create an account record in Google Firebase containing your email, your AI credit balance and free-usage allowances, and basic device metadata (device model, OS version, app version, language, approximate country, and a device identifier used to prevent abuse of free allowances).</li>
+                <li><strong>Guest mode:</strong> without signing in, an anonymous identifier is created (Firebase Anonymous Authentication) with free-usage meters tied to your device. No name or email is involved.</li>
+                <li><strong>AI assistant (MagicBot):</strong> when you use the in-app AI assistant, the text of your question is sent to Google's Gemini API to generate the answer, together with live park context (wait times, schedules, weather). We do <strong>not</strong> store the text of your questions on our servers; we keep aggregate usage metrics (token counts, credits used) linked to a hashed identifier, for cost control and abuse prevention.</li>
+                <li><strong>Usage data:</strong> events about how the app is used (screens viewed, features used, language, device type, approximate country, sign-in method, subscription status). When you are signed in, part of this data is associated with your account email; in production we only log a random sample of users.</li>
+                <li><strong>Device integrity:</strong> to protect free allowances from abuse, the app uses Google Play Integrity (Android) and Apple App Attest (iOS) to verify it is running on a genuine device. These checks do not identify you personally.</li>
+                <li><strong>Location (optional):</strong> only if you explicitly grant permission, to open walking/driving routes and show nearby information. Raw GPS coordinates are never stored or transmitted to our servers; at most we derive a coarse area (for example, "Orlando") to understand where the app is used.</li>
+                <li><strong>Purchase information:</strong> subscriptions and AI credit packs are processed by Apple (App Store) or Google (Google Play) and managed by RevenueCat. We receive only the purchase/subscription status — we never access your payment card details.</li>
+                <li><strong>Rewarded ads (optional):</strong> you may choose to watch a video ad to earn AI credits or unlock features. When you complete a video, Google AdMob notifies our server (server-side verification) with your account or anonymous identifier so the reward can be credited — no personal data is included.</li>
             </ul>
         </section>
 
@@ -89,11 +89,12 @@ Aquí está el HTML completo:
             <p>Any data collected is used exclusively to:</p>
             <ul>
                 <li>Display accurate, real-time wait times for Orlando theme parks.</li>
-                <li>Identify your session when you sign in with Facebook or Google.</li>
-                <li>Manage your Premium subscription status.</li>
+                <li>Identify your account when you sign in with Google, Facebook or Apple.</li>
+                <li>Manage your subscription, AI credits and free-usage allowances.</li>
+                <li>Generate MagicBot answers through Google's Gemini API.</li>
                 <li>Show contextual advertisements to users on ad-supported plans (no personalized tracking is used).</li>
-                <li>Diagnose and fix technical issues or app crashes.</li>
-                <li>Improve app performance and user experience over time.</li>
+                <li>Prevent abuse of free allowances (rate limits, device integrity checks, annual usage caps).</li>
+                <li>Diagnose and fix technical issues, and improve the app over time.</li>
             </ul>
             <p>We do <strong>not</strong> sell your data to third parties or use it for profiling.</p>
         </section>
@@ -106,11 +107,15 @@ Aquí está el HTML completo:
             <p>Maximize Magic integrates the following third-party services, each governed by their own privacy policies:</p>
             <ul>
                 <li><strong>themeparks API:</strong> open-source API used to retrieve real-time wait time data. No personal user data is sent to this service.</li>
-                <li><strong>Facebook Login:</strong> used for optional sign-in. When you log in with Facebook, we receive your name and email from Facebook in accordance with <a href="https://www.facebook.com/privacy/policy/" class="contact-link" target="_blank">Meta's Privacy Policy</a>.</li>
-                <li><strong>Google Sign-In:</strong> used for optional sign-in. When you log in with Google, we receive your name and email from Google in accordance with <a href="https://policies.google.com/privacy" class="contact-link" target="_blank">Google's Privacy Policy</a>.</li>
-                <li><strong>Google AdMob:</strong> used to display advertisements on ad-supported plans. AdMob may use device identifiers to show contextual ads. The app does not request permission to track you across other apps (no IDFA). See <a href="https://policies.google.com/privacy" class="contact-link" target="_blank">Google's Privacy Policy</a>.</li>
-                <li><strong>RevenueCat:</strong> used to manage in-app subscriptions. RevenueCat processes purchase receipts and subscription status on our behalf. See <a href="https://www.revenuecat.com/privacy" class="contact-link" target="_blank">RevenueCat's Privacy Policy</a>.</li>
-                <li><strong>Firebase Crashlytics:</strong> used solely for crash reporting and app stability diagnostics. See <a href="https://firebase.google.com/support/privacy" class="contact-link" target="_blank">Firebase's Privacy Policy</a>.</li>
+                <li><strong>WeatherAPI.com:</strong> weather forecasts for the Orlando area. No personal user data is sent to this service.</li>
+                <li><strong>Wikipedia:</strong> attraction images. No personal user data is sent to this service.</li>
+                <li><strong>Google Sign-In / Facebook Login / Sign in with Apple:</strong> optional sign-in. We receive your name and email from the provider you choose, in accordance with its privacy policy.</li>
+                <li><strong>Google Firebase:</strong> our backend — authentication, database (account records, credits, usage allowances), analytics and cloud functions. See Google's Privacy Policy.</li>
+                <li><strong>Google Gemini API:</strong> generates MagicBot answers. Your questions are processed by Google in accordance with Google's Privacy Policy.</li>
+                <li><strong>Google Places API:</strong> used for some MagicBot answers about nearby businesses (for example, pharmacies near a park). Only the query and an approximate location are sent.</li>
+                <li><strong>Google AdMob:</strong> banner, interstitial and rewarded advertisements on ad-supported plans. AdMob may use device identifiers to show contextual ads. The app does not request permission to track you across other apps. See Google's Privacy Policy.</li>
+                <li><strong>RevenueCat:</strong> manages in-app subscriptions and credit packs. RevenueCat processes purchase receipts and subscription status on our behalf. See RevenueCat's Privacy Policy.</li>
+                <li><strong>Google Play Integrity / Apple App Attest:</strong> device integrity verification to prevent abuse. See the respective privacy policies of Google and Apple.</li>
             </ul>
         </section>
 
@@ -127,7 +132,7 @@ Aquí está el HTML completo:
                 <div class="section-icon">🛡️</div>
                 <h2>5. Data Security</h2>
             </div>
-            <p>We take reasonable technical and organizational measures to protect any information processed by the app. Since we do not store personal data on our own servers, the risk of data exposure is minimized by design.</p>
+            <p>Account records are stored in Google Firebase with industry-standard protections, and direct access is restricted to our backend services. We minimize what we store by design: AI questions are not persisted, raw location is never kept, and usage analytics in production cover only a random sample of users.</p>
         </section>
 
         <section>
@@ -135,8 +140,8 @@ Aquí está el HTML completo:
                 <div class="section-icon">⚖️</div>
                 <h2>6. Your Rights</h2>
             </div>
-            <p>Depending on your location, you may have rights regarding your data, including access, correction, or deletion. Since we collect minimal identifying information, most requests can be fulfilled simply by uninstalling the app and revoking access from your Facebook or Google account settings.</p>
-            <p>For any data-related requests, please contact us using the information below.</p>
+            <p>Depending on your location, you may have rights regarding your data, including access, correction, or deletion. You can delete your account and its server-side record at any time from within the app (see below), and you can revoke the app's access from your Google, Facebook or Apple account settings.</p>
+            <p>For any other data-related request, please contact us using the information below.</p>
         </section>
 
         <section>
@@ -144,13 +149,13 @@ Aquí está el HTML completo:
                 <div class="section-icon">🗑️</div>
                 <h2>7. Account Deletion</h2>
             </div>
-            <p>You can delete your account and all associated local data at any time directly within the app:</p>
+            <p>You can delete your account at any time directly within the app:</p>
+            <p>Open the app → <strong>Settings → Delete Account</strong>. This deletes your account record from our database (email, credit balance, usage allowances and device metadata), removes your authentication account, signs you out, and permanently deletes all preferences, saved parks, plans, and session data stored on your device. If you sign back in with the same account shortly afterwards, your balances may be restored as a courtesy against accidental deletion.</p>
             <ul>
-                <li>Open the app → <strong>Settings → Delete Account</strong>. This signs you out of Facebook and Google, and permanently deletes all preferences, saved parks, plans, and session data stored on your device. The app will close automatically after deletion.</li>
                 <li>To revoke the app's access to your <strong>Facebook</strong> account, go to Facebook → Settings → Apps and Websites and remove Maximize Magic.</li>
                 <li>To revoke the app's access to your <strong>Google</strong> account, go to Google Account → Security → Third-party apps with account access and remove Maximize Magic.</li>
+                <li>To stop using <strong>Sign in with Apple</strong> with the app, go to iPhone Settings → your name → Sign-In &amp; Security → Sign in with Apple and remove Maximize Magic.</li>
             </ul>
-            <p style="margin-top: 12px;">Since we do not store personal data on our own servers, completing the in-app deletion constitutes full account deletion. No further action is required.</p>
         </section>
 
         <section>
@@ -161,13 +166,8 @@ Aquí está el HTML completo:
             <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date at the top. We encourage you to review this page periodically. Continued use of the app after changes constitutes acceptance of the new policy.</p>
         </section>
 
-        <div class="divider"></div>
-
         <div class="contact-box">
-            <div class="section-header" style="justify-content: center; margin-bottom: 10px;">
-                <div class="section-icon">✉️</div>
-                <h2>Contact Us</h2>
-            </div>
+            <h2>✉️ Contact Us</h2>
             <p>Have questions about this Privacy Policy or how your data is handled?</p>
             <a href="https://github.com/egnunez-stack/MaximizeMagic/issues" class="contact-link">Open an issue on GitHub →</a>
         </div>
@@ -178,4 +178,3 @@ Aquí está el HTML completo:
     </footer>
 </body>
 </html>
-```
