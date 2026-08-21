@@ -55,7 +55,7 @@
         <span class="star-icon">✨</span>
         <h1>Privacy Policy</h1>
         <p class="subtitle">Maximize Magic · Orlando Parks</p>
-        <div class="last-updated">Last updated: August 15, 2026</div>
+        <div class="last-updated">Last updated: August 21, 2026</div>
     </header>
 
     <main>
@@ -75,8 +75,9 @@
                 <li><strong>AI assistant (MagicBot):</strong> when you use the in-app AI assistant, the text of your question is sent to Google's Gemini API to generate the answer, together with live park context (wait times, schedules, weather). We do <strong>not</strong> store the text of your questions on our servers; we keep aggregate usage metrics (token counts, credits used) linked to a hashed identifier, for cost control and abuse prevention.</li>
                 <li><strong>Usage data:</strong> events about how the app is used (screens viewed, features used, language, device type, approximate country, sign-in method, subscription status). When you are signed in, part of this data is associated with your account email; in production we only log a random sample of users.</li>
                 <li><strong>Device integrity:</strong> to protect free allowances from abuse, the app uses Google Play Integrity (Android) and Apple App Attest (iOS) to verify it is running on a genuine device. These checks do not identify you personally.</li>
-                <li><strong>Location (optional):</strong> only if you explicitly grant permission, to open walking/driving routes and show nearby information. Raw GPS coordinates are never stored or transmitted to our servers; at most we derive a coarse area (for example, "Orlando") to understand where the app is used.</li>
+                <li><strong>Location (optional):</strong> only if you explicitly grant permission. Your parking location is stored <strong>on your device only</strong> and never leaves it. When you ask MagicBot about places near you, your coordinates are sent with that request so the answer can be about your surroundings, and they are forwarded to the Google Places API for that single query &mdash; we do not keep them afterwards. For analytics we only derive a coarse area (for example, "Orlando") to understand where the app is used.</li>
                 <li><strong>Purchase information:</strong> subscriptions and AI credit packs are processed by Apple (App Store) or Google (Google Play) and managed by RevenueCat. We receive only the purchase/subscription status — we never access your payment card details.</li>
+                <li><strong>Advertising identifier:</strong> on ad-supported plans, Google AdMob reads your device's advertising identifier (IDFA on iOS, Advertising ID on Android). It is used to serve and measure ads and, <strong>only if you allow it</strong> (Apple's App Tracking Transparency prompt on iOS, Google's consent form in the EEA and the UK), to personalise them. Our own servers never receive or store this identifier. Subscribers on the ad-free plan see no ads at all.</li>
                 <li><strong>Rewarded ads (optional):</strong> you may choose to watch a video ad to earn AI credits or unlock features. When you complete a video, Google AdMob notifies our server (server-side verification) with your account or anonymous identifier so the reward can be credited — no personal data is included.</li>
             </ul>
         </section>
@@ -92,11 +93,11 @@
                 <li>Identify your account when you sign in with Google, Facebook or Apple.</li>
                 <li>Manage your subscription, AI credits and free-usage allowances.</li>
                 <li>Generate MagicBot answers through Google's Gemini API.</li>
-                <li>Show contextual advertisements to users on ad-supported plans (no personalized tracking is used).</li>
+                <li>Show advertisements to users on ad-supported plans. Where you have given permission, an advertising identifier may be used to personalise those ads and to measure them; if you decline, ads are still shown but are contextual only.</li>
                 <li>Prevent abuse of free allowances (rate limits, device integrity checks, annual usage caps).</li>
                 <li>Diagnose and fix technical issues, and improve the app over time.</li>
             </ul>
-            <p>We do <strong>not</strong> sell your data to third parties or use it for profiling.</p>
+            <p>We do <strong>not</strong> sell your data, and we do not build advertising profiles of you ourselves. If you allow personalised advertising, Google may use the advertising identifier for that purpose under its own policy; you can withdraw that permission at any time.</p>
         </section>
 
         <section>
@@ -113,7 +114,7 @@
                 <li><strong>Google Firebase:</strong> our backend — authentication, database (account records, credits, usage allowances), analytics and cloud functions. See Google's Privacy Policy.</li>
                 <li><strong>Google Gemini API:</strong> generates MagicBot answers. Your questions are processed by Google in accordance with Google's Privacy Policy.</li>
                 <li><strong>Google Places API:</strong> used for some MagicBot answers about nearby businesses (for example, pharmacies near a park). Only the query and an approximate location are sent.</li>
-                <li><strong>Google AdMob:</strong> banner, interstitial and rewarded advertisements on ad-supported plans. AdMob may use device identifiers to show contextual ads. The app does not request permission to track you across other apps. See Google's Privacy Policy.</li>
+                <li><strong>Google AdMob:</strong> banner, interstitial and rewarded advertisements on ad-supported plans. AdMob uses your device's <strong>advertising identifier</strong> (IDFA on iOS, Advertising ID on Android) together with basic device signals to serve, cap and measure ads. On iOS we ask for your permission through Apple's <strong>App Tracking Transparency</strong> prompt before that identifier can be used for personalised advertising; in the EEA and the UK the equivalent choice is offered through Google's consent form. If you decline, ads are still shown but are not personalised. You can change your choice at any time in your device settings. See Google's Privacy Policy.</li>
                 <li><strong>RevenueCat:</strong> manages in-app subscriptions and credit packs. RevenueCat processes purchase receipts and subscription status on our behalf. See RevenueCat's Privacy Policy.</li>
                 <li><strong>Google Play Integrity / Apple App Attest:</strong> device integrity verification to prevent abuse. See the respective privacy policies of Google and Apple.</li>
             </ul>
